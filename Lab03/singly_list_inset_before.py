@@ -63,6 +63,7 @@ class SinglyLinkedList:
         else:
             new_node.set_next(self.head)
             self.head = new_node
+        self.count += 1
 
     def insert_before(self, node, data):
         '''insert the new node at the front of node by set'''
