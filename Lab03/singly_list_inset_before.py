@@ -66,4 +66,44 @@ class SinglyLinkedList:
 
     def insert_before(self, node, data):
         '''insert the new node at the front of node by set'''
-        
+        new_node = DataNode(data)
+        current = self.head
+        prev = None
+
+        if current is None:
+            print("Cannot insert, %s does not exist." % node)
+            return
+
+        if current.get_data() == node:
+            self.insert_front(data)
+            return
+
+        while current is not None and current.get_data() != node:
+            prev = current
+            current = current.get_next()
+
+        if current is None:
+            print("Cannot insert, %s does not exist." % node)
+            return
+
+        new_node.set_next(current)
+        if prev is not None:
+            prev.set_next(new_node)
+        else:
+            self.head = new_node
+
+        self.count += 1
+
+LIST1_ = SinglyLinkedList()
+for _ in range(int(input())):
+    TEXT_ = input()
+    CONDI_, DATA_ = TEXT_.split(": ")
+    if CONDI_ == "F":
+        LIST1_.insert_front(DATA_)
+    elif CONDI_ == "L":
+        LIST1_.insert_last(DATA_)
+    elif CONDI_ == "B":
+        LIST1_.insert_before(*DATA_.split(", "))
+    else:
+        print("Invalid Condition!")
+LIST1_.traverse()
